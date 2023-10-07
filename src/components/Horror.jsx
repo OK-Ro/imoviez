@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 
-function Action() {
+function Horror() {
   const [randomMovies, setRandomMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,8 @@ function Action() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "https://node-mongo-mv85.onrender.com/api/movies/action";
+        const apiUrl =
+          "https://node-mongo-mv85.onrender.com/api/movies/horrorthriller";
 
         const response = await axios.get(apiUrl);
         console.log("API Response:", response.data);
@@ -35,7 +36,7 @@ function Action() {
   return (
     <PopularContainer>
       <PopularHeader>
-        <h1>Action</h1>
+        <h1>Horror</h1>
       </PopularHeader>
 
       {isLoading ? (
@@ -163,4 +164,4 @@ const MoviePoster = styled.div`
   }
 `;
 
-export default Action;
+export default Horror;

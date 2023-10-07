@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 
-function Action() {
+function Animation() {
   const [randomMovies, setRandomMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,8 +14,8 @@ function Action() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = "https://node-mongo-mv85.onrender.com/api/movies/action";
-
+        const apiUrl =
+          "https://node-mongo-mv85.onrender.com/api/movies/animated";
         const response = await axios.get(apiUrl);
         console.log("API Response:", response.data);
         setRandomMovies(response.data.movies);
@@ -30,12 +30,10 @@ function Action() {
     fetchData();
   }, []);
 
-  console.log("Random Movies:", randomMovies);
-
   return (
     <PopularContainer>
       <PopularHeader>
-        <h1>Action</h1>
+        <h1>Animation</h1>
       </PopularHeader>
 
       {isLoading ? (
@@ -57,6 +55,7 @@ function Action() {
                   <Link to={`details/${movie._id}`}>
                     <img src={movie.thumbnail} alt={movie.title} />
                     <PlayCircleOutlineIcon className="play-button" />
+                    {/* Add the PlayCircleOutlineIcon here */}
                   </Link>
                 </MoviePoster>
               </SplideSlide>
@@ -124,7 +123,6 @@ const ErrorIndicator = styled.div`
   font-size: 1.5rem;
   color: red;
 `;
-
 const MoviePoster = styled.div`
   width: 10vw;
   margin: 10px;
@@ -143,9 +141,9 @@ const MoviePoster = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+
   .play-button {
     color: yellow;
-
     position: absolute;
     top: 50%;
     left: 50%;
@@ -157,10 +155,5 @@ const MoviePoster = styled.div`
   &:hover .play-button {
     opacity: 1;
   }
-
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
-
-export default Action;
+export default Animation;

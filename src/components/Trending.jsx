@@ -14,19 +14,13 @@ function Trending() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const localData = localStorage.getItem("randomMovies");
-        if (localData) {
-          setRandomMovies(JSON.parse(localData));
-          setIsLoading(false);
-        } else {
-          const apiUrl =
-            "https://node-mongo-mv85.onrender.com/api/movies?number=42";
+        const apiUrl =
+          "https://node-mongo-mv85.onrender.com/api/movies?number=42";
 
-          const response = await axios.get(apiUrl);
-          console.log("API Response:", response.data);
-          setRandomMovies(response.data.movies);
-          setIsLoading(false);
-        }
+        const response = await axios.get(apiUrl);
+        console.log("API Response:", response.data);
+        setRandomMovies(response.data.movies);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("An error occurred while fetching data.");
