@@ -9,7 +9,6 @@ function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     navigate("/searchedResults/" + input);
   };
 
@@ -32,6 +31,11 @@ const FormStyle = styled.form`
   margin: 4rem;
   text-align: center;
   padding-top: 6rem;
+
+  @media (max-width: 768px) {
+    margin: 2rem;
+    padding-top: 4rem;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -41,11 +45,19 @@ const SearchContainer = styled.div`
   padding: 1.5rem 4rem;
   border-radius: 3rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding: 1rem 1rem;
+  }
 `;
 
 const SearchIcon = styled(FaSearch)`
   font-size: 2rem;
   color: #555;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -56,6 +68,11 @@ const SearchInput = styled.input`
   margin-left: 1rem;
   outline: none;
   width: 100%;
+
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
+    height: 0.5rem;
+  }
 `;
 
 export default SearchBar;

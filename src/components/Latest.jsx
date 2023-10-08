@@ -11,30 +11,36 @@ const Latest = () => {
     <Wrapper>
       <Container>
         {latestMovies.length > 0 ? (
-          <Carousel
-            autoPlay
-            infiniteLoop
-            showThumbs={false}
-            showStatus={false}
-            showIndicators={false}
-            emulateTouch
-          >
-            {latestMovies.map((movie) => (
-              <div key={movie.title}>
-                <Card>
-                  <Image src={movie.thumbnail} alt={movie.title} />
-                  <Content>
-                    <Title>{movie.title}</Title>
-                    <MovieInfo>
-                      <p>Year: {movie.year}</p>
-                      <p>Cast: {movie.cast.join(", ")}</p>
-                      <p>Genres: {movie.genres.join(", ")}</p>
-                    </MovieInfo>
-                  </Content>
-                </Card>
-              </div>
-            ))}
-          </Carousel>
+          <>
+            {/* Use the <style> tag outside of the JSX */}
+            <style>{CarouselStyles}</style>
+            <Carousel
+              autoPlay
+              infiniteLoop
+              showThumbs={false}
+              showStatus={false}
+              showIndicators={false}
+              emulateTouch
+              showArrows={false}
+              style={{ padding: "20px" }}
+            >
+              {latestMovies.map((movie) => (
+                <div key={movie.title}>
+                  <Card>
+                    <Image src={movie.thumbnail} alt={movie.title} />
+                    <Content>
+                      <Title>{movie.title}</Title>
+                      <MovieInfo>
+                        <p>Year: {movie.year}</p>
+                        <p>Cast: {movie.cast.join(", ")}</p>
+                        <p>Genres: {movie.genres.join(", ")}</p>
+                      </MovieInfo>
+                    </Content>
+                  </Card>
+                </div>
+              ))}
+            </Carousel>
+          </>
         ) : (
           <p>No latest movies available.</p>
         )}
@@ -52,6 +58,10 @@ const Container = styled.div`
   padding-top: 15rem;
   display: block;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding-top: 4rem;
+  }
 `;
 
 const Card = styled.div`
@@ -68,12 +78,18 @@ const Card = styled.div`
   &:hover {
     transform: scale(1.02);
   }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    height: 10rem;
+    border-radius: 1.5rem;
+  }
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: fit-content;
-  object-fit: fill;
+  height: auto;
+  object-fit: cover;
 `;
 
 const Content = styled.div`
@@ -83,6 +99,10 @@ const Content = styled.div`
   right: 0;
   background-color: rgba(0, 0, 0, 0.08);
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 `;
 
 const Title = styled.p`
@@ -91,8 +111,17 @@ const Title = styled.p`
   color: #fff;
   margin-bottom: 0.5rem;
   padding-left: 2rem;
-
   text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding-left: 0.8rem;
+  }
+`;
+const CarouselStyles = `
+  .carousel-root {
+    overflow: auto !important;
+  }
 `;
 
 const MovieInfo = styled.div`
@@ -104,6 +133,13 @@ const MovieInfo = styled.div`
   width: 35rem;
   p {
     margin: 0.25rem 0;
+  }
+
+  @media (max-width: 768px) {
+    width: auto;
+    padding-bottom: 0.1rem;
+    padding-left: 0.8rem;
+    font-size: 0.4rem;
   }
 `;
 

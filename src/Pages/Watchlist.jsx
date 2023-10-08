@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MovieContext } from "../context/movieContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom"; // Import Link for routing
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 function Watchlist() {
@@ -61,21 +61,25 @@ const WatchlistContainer = styled.div`
 `;
 
 const BackButton = styled(Link)`
+  background-color: #333;
   color: #fff;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: color 0.3s ease-in-out; /* Add a color transition */
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
-    color: #e50914; /* Change color on hover */
+    background-color: #555;
   }
 
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-size: 14px;
   }
 `;
 
@@ -106,12 +110,12 @@ const EmptyWatchlistMessage = styled.p`
 const MoviesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 50px;
   margin-top: 20px;
 
   @media (max-width: 768px) {
-    /* Adjust grid layout for smaller screens to have 2 items per row */
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 `;
 

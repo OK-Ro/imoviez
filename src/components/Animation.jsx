@@ -31,10 +31,10 @@ function Animation() {
   }, []);
 
   return (
-    <PopularContainer>
-      <PopularHeader>
+    <AnimationContainer>
+      <AnimationHeader>
         <h1>Animation</h1>
-      </PopularHeader>
+      </AnimationHeader>
 
       {isLoading ? (
         <LoadingIndicator>Loading...</LoadingIndicator>
@@ -44,9 +44,10 @@ function Animation() {
         <SliderContainer>
           <CustomSplide
             options={{
-              perPage: 8,
+              perPage: window.innerWidth >= 768 ? 8 : 4,
               gap: "0.2rem",
               pagination: false,
+              arrows: false,
             }}
           >
             {randomMovies.map((movie) => (
@@ -55,7 +56,6 @@ function Animation() {
                   <Link to={`details/${movie._id}`}>
                     <img src={movie.thumbnail} alt={movie.title} />
                     <PlayCircleOutlineIcon className="play-button" />
-                    {/* Add the PlayCircleOutlineIcon here */}
                   </Link>
                 </MoviePoster>
               </SplideSlide>
@@ -63,26 +63,49 @@ function Animation() {
           </CustomSplide>
         </SliderContainer>
       )}
-    </PopularContainer>
+    </AnimationContainer>
   );
 }
 
-const PopularContainer = styled.div`
+const AnimationContainer = styled.div`
   background-color: #000;
   color: #fff;
   font-family: Arial, sans-serif;
   padding: 3rem;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
 `;
 
-const PopularHeader = styled.div`
+const AnimationHeader = styled.div`
   background-color: transparent;
   padding: 20px;
   padding-left: 40px;
   text-align: left;
+  background: url("https://image.shutterstock.com/image-vector/city-scene-on-night-time-260nw-498848536.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    font-size: 0.6rem;
+    padding: 0;
+    padding-left: 20px;
+  }
 `;
 
 const SliderContainer = styled.div`
   margin: 20px;
+
+  @media (max-width: 768px) {
+    margin: 10px;
+  }
 `;
 
 const CustomSplide = styled(Splide)`
@@ -93,13 +116,19 @@ const CustomSplide = styled(Splide)`
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-    border-radius: 10px; /* Rounded corners for the movie posters */
+    border-radius: 10px;
+
+    @media (max-width: 768px) {
+      widith: 200px;
+      height: 18vh;
+    }
   }
 
   .splide__slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    border-radius: 10px;
   }
 
   .splide__slide:hover {
@@ -113,6 +142,10 @@ const LoadingIndicator = styled.div`
   align-items: center;
   height: 200px;
   font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ErrorIndicator = styled.div`
@@ -122,7 +155,12 @@ const ErrorIndicator = styled.div`
   height: 200px;
   font-size: 1.5rem;
   color: red;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
+
 const MoviePoster = styled.div`
   width: 10vw;
   margin: 10px;
@@ -132,9 +170,15 @@ const MoviePoster = styled.div`
   transition: transform 0.2s;
   border-radius: 10px;
 
-  img {
+  @media (max-width: 768px) {
     width: 100%;
-    height: auto;
+    height: 100%;
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
     display: block;
   }
 
@@ -144,6 +188,7 @@ const MoviePoster = styled.div`
 
   .play-button {
     color: yellow;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -154,6 +199,10 @@ const MoviePoster = styled.div`
 
   &:hover .play-button {
     opacity: 1;
+  }
+
+  &:hover {
+    transform: scale(1.05);
   }
 `;
 export default Animation;

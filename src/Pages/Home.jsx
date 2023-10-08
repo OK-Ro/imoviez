@@ -7,16 +7,18 @@ import Trending from "../components/Trending";
 import Footer from "../components/Footer";
 import Horror from "../components/Horror";
 import Animation from "../components/Animation";
+import Romance from "../components/Romance";
 
 function Home() {
   return (
     <div>
       <Latest />
       <Category />
-      <Actions />
       <Trending />
-      <Animation />
+      <Actions />
       <Popular />
+      <Animation />
+      <Romance />
       <Horror />
       <Footer />
     </div>

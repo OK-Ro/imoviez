@@ -34,10 +34,10 @@ function Horror() {
   console.log("Random Movies:", randomMovies);
 
   return (
-    <PopularContainer>
-      <PopularHeader>
+    <HorrorContainer>
+      <HorrorHeader>
         <h1>Horror</h1>
-      </PopularHeader>
+      </HorrorHeader>
 
       {isLoading ? (
         <LoadingIndicator>Loading...</LoadingIndicator>
@@ -47,9 +47,10 @@ function Horror() {
         <SliderContainer>
           <CustomSplide
             options={{
-              perPage: 8,
+              perPage: window.innerWidth >= 768 ? 8 : 4,
               gap: "0.2rem",
               pagination: false,
+              arrows: false,
             }}
           >
             {randomMovies.map((movie) => (
@@ -65,26 +66,50 @@ function Horror() {
           </CustomSplide>
         </SliderContainer>
       )}
-    </PopularContainer>
+    </HorrorContainer>
   );
 }
 
-const PopularContainer = styled.div`
+const HorrorContainer = styled.div`
   background-color: #000;
   color: #fff;
   font-family: Arial, sans-serif;
   padding: 3rem;
+  margin-bottom: 10rem;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
 `;
 
-const PopularHeader = styled.div`
+const HorrorHeader = styled.div`
   background-color: transparent;
   padding: 20px;
   padding-left: 40px;
   text-align: left;
+  background: url("https://image.shutterstock.com/image-vector/city-scene-on-night-time-260nw-498848536.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    font-size: 0.6rem;
+    padding: 0;
+    padding-left: 20px;
+  }
 `;
 
 const SliderContainer = styled.div`
   margin: 20px;
+
+  @media (max-width: 768px) {
+    margin: 10px;
+  }
 `;
 
 const CustomSplide = styled(Splide)`
@@ -95,13 +120,19 @@ const CustomSplide = styled(Splide)`
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-    border-radius: 10px; /* Rounded corners for the movie posters */
+    border-radius: 10px;
+
+    @media (max-width: 768px) {
+      widith: 200px;
+      height: 18vh;
+    }
   }
 
   .splide__slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    border-radius: 10px;
   }
 
   .splide__slide:hover {
@@ -115,6 +146,10 @@ const LoadingIndicator = styled.div`
   align-items: center;
   height: 200px;
   font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ErrorIndicator = styled.div`
@@ -124,6 +159,10 @@ const ErrorIndicator = styled.div`
   height: 200px;
   font-size: 1.5rem;
   color: red;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const MoviePoster = styled.div`
@@ -135,15 +174,22 @@ const MoviePoster = styled.div`
   transition: transform 0.2s;
   border-radius: 10px;
 
-  img {
+  @media (max-width: 768px) {
     width: 100%;
-    height: auto;
+    height: 100%;
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
     display: block;
   }
 
   &:hover {
     transform: scale(1.05);
   }
+
   .play-button {
     color: yellow;
 

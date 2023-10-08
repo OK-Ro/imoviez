@@ -1,8 +1,13 @@
 import React, { useEffect, useState, useCallback, useContext } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faVideo, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlay,
+  faVideo,
+  faBookmark,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 import { MovieContext } from "../context/movieContext";
 
@@ -14,7 +19,6 @@ function Details() {
 
   const [added, setAdded] = useState(false);
 
-  // Access the context
   const { addToWatchlist, removeFromWatchlist } = useContext(MovieContext);
 
   const fetchDetails = useCallback(async () => {
@@ -52,6 +56,10 @@ function Details() {
 
   return (
     <DetailsContainer>
+      <BackButton to="/">
+        <FontAwesomeIcon icon={faArrowLeft} /> Back
+      </BackButton>
+
       <CoverImage>
         <img src={details.thumbnail} alt={details.title} />
       </CoverImage>
@@ -74,10 +82,10 @@ function Details() {
                   } else {
                     addToWatchlist(params.id, details);
                   }
-                  setAdded(!added); // Toggle the added state
+                  setAdded(!added);
                 }}
               >
-                <FontAwesomeIcon icon={faBookmark} />{" "}
+                <FontAwesomeIcon icon={faBookmark} />
                 {added ? "Remove from WatchList" : "Add to WatchList"}
               </AddToWatchlistButton>
             </TopInfo>
@@ -93,7 +101,9 @@ function Details() {
                   <FontAwesomeIcon icon={faVideo} /> Trailer
                 </TrailerButton>
                 <WatchButton>HD</WatchButton>
-                <strong>IMDB: 8.7</strong>
+                <IMDBRating className="imdb-rating">
+                  IMDB:<strong>8.7</strong>
+                </IMDBRating>
               </GroupedButtons>
             </WatchButtons>
             <InfoItem>
@@ -134,11 +144,16 @@ function Details() {
     </DetailsContainer>
   );
 }
-
 const DetailsContainer = styled.div`
   background-color: #000;
   padding: 20px;
   position: relative;
+  padding-top: 10rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    padding-top: 6rem;
+  }
 `;
 
 const CoverImage = styled.div`
@@ -153,6 +168,18 @@ const CoverImage = styled.div`
     object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 100%;
+      margin-top: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
   }
 `;
 
@@ -161,22 +188,58 @@ const MovieDetails = styled.div`
   padding: 20px;
   border-radius: 4rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-left: 15rem;
-  margin-right: 15rem;
-  height: 45vh;
-  padding-top: 4rem;
-  margin-bottom: 4rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  padding-top: 8rem;
+  height: 40vh;
+  margin-bottom: 10rem;
+
+  @media (max-width: 768px) {
+    border-radius: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 10px;
+    height: fit-content;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+  }
+`;
+const BackButton = styled(Link)`
+  background-color: #133;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  &:hover {
+    background-color: #555;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 10rem;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
 `;
 
 const ImageContainer = styled.div`
   flex: 1;
   text-align: center;
   margin-right: 20px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   img {
     max-width: 100%;
@@ -184,11 +247,15 @@ const ImageContainer = styled.div`
     border-radius: 5px;
     box-shadow: 25px 25px 100px rgb(0, 0, 0);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const DetailsInfo = styled.div`
   flex: 2;
-  padding-right: 15rem;
+  padding-right: 1rem;
 `;
 
 const TopInfo = styled.div`
@@ -196,17 +263,20 @@ const TopInfo = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
-`;
 
-const InfoItem = styled.p`
-  margin: 10px 0;
-  font-size: 18px;
-
-  strong {
-    font-weight: bold;
-    margin-right: 10px;
+  @media (max-width: 768px) {
+    align-items: flex-start;
   }
 `;
+
+const InfoItem = styled.div`
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+`;
+
 const PlayButton = styled.button`
   background-color: #ff5722;
   color: #fff;
@@ -230,7 +300,16 @@ const PlayButton = styled.button`
   &:hover {
     background-color: #e64a19;
   }
+
+  @media (max-width: 768px) {
+    padding: 5px 15px;
+    border-radius: 1.5rem;
+    font-size: 13px;
+    height: 2.4rem;
+    width: 7rem;
+  }
 `;
+
 const TrailerButton = styled.button`
   background-color: #000;
   color: #fff;
@@ -254,6 +333,10 @@ const TrailerButton = styled.button`
   &:hover {
     background-color: #e64a19;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const WatchButton = styled.button`
@@ -268,8 +351,19 @@ const WatchButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
+
   &:hover {
     background-color: #e64a19;
+  }
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+const IMDBRating = styled.strong`
+  color: #ff4000;
+  font-weight: bold;
+  strong {
+    color: black;
   }
 `;
 
@@ -282,23 +376,43 @@ const LoadingIndicator = styled.div`
   text-align: center;
   font-size: 1.5rem;
   color: #333;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ErrorIndicator = styled.div`
   text-align: center;
   font-size: 1.5rem;
   color: red;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const WatchButtons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const LikeDislikeButtons = styled.div`
   margin-top: 10px;
+
+  @media (max-width: 768px) {
+    display: flex;
+
+    align-items: flex-start;
+  }
 `;
+
 const AddToWatchlistButton = styled.button`
   background-color: #a5acb3;
   box-shadow: 25px 25px 100px rgb(0, 0, 0);
@@ -320,6 +434,14 @@ const AddToWatchlistButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+
+  @media (max-width: 768px) {
+    padding: 5px 15px;
+    border-radius: 1.5rem;
+    font-size: 13px;
+    height: 2.4rem;
+    width: 9rem;
+  }
 `;
 
 const LikeButton = styled.button`
@@ -332,6 +454,10 @@ const LikeButton = styled.button`
   font-size: 16px;
   margin-right: 10px;
   box-shadow: 25px 25px 100px rgb(0, 0, 0);
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 const DislikeButton = styled.button`
@@ -343,6 +469,10 @@ const DislikeButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   box-shadow: 25px 25px 100px rgb(0, 0, 0);
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 export default Details;

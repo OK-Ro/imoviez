@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineHome, AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
+import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
 const NavigationBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,10 +23,12 @@ const NavigationBar = () => {
 
   return (
     <Nav isScrolled={isScrolled}>
-      <Logo to="/">
-        <FontAwesomeIcon icon={faCoffee} beat style={{ color: "#ff0000" }} />
-        Movies
-      </Logo>
+      <DesktopOnly>
+        <Logo to="/">
+          <FontAwesomeIcon icon={faDatabase} style={{ color: "#ff0000" }} />
+          Movies
+        </Logo>
+      </DesktopOnly>
       <Icons>
         <IconLink to="/" data-tooltip="Home">
           <AiOutlineHome />
@@ -73,19 +75,27 @@ const Nav = styled.nav`
   `}
 
   @media (max-width: 768px) {
-    padding: 0.2rem;
+    padding: 0.4rem;
     flex-direction: column;
     width: 100%;
     align-items: center;
+    height: 10vh;
+    padding-top: 0.7rem;
+  }
+`;
+
+const DesktopOnly = styled.div`
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
 const Logo = styled(Link)`
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   text-decoration: none;
   font-weight: 700;
-  text-aligin: center;
+  text-align: center;
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -97,15 +107,14 @@ const Icons = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-
   @media (max-width: 768px) {
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
   }
 `;
 
 const IconLink = styled(Link)`
   font-size: 2.5rem;
-  margin-right: 2rem;
+  margin-right: 6rem;
   cursor: pointer;
   font-weight: 700;
   color: white;
@@ -154,7 +163,7 @@ const IconLink = styled(Link)`
   }
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-right: 4rem;
   }
 `;
@@ -214,6 +223,7 @@ const ProfileLink = styled(Link)`
     margin-right: 1rem;
   }
 `;
+
 const ProfileImage = styled.img`
   width: 50px;
   height: 50px;
@@ -225,4 +235,5 @@ const ProfileImage = styled.img`
     border-radius: 50%;
   }
 `;
+
 export default NavigationBar;

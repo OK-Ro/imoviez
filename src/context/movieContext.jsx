@@ -9,7 +9,7 @@ const MovieContextProvider = ({ children }) => {
   const [watchList, setWatchList] = useState(
     JSON.parse(localStorage.getItem("watchList")) || []
   );
-  console.log("Loaded watchList from context:", watchList);
+ 
 
   useEffect(() => {
     setLoading(true);
@@ -42,7 +42,7 @@ const MovieContextProvider = ({ children }) => {
   };
 
   const removeFromWatchlist = (movieId) => {
-    // Remove the movie with the specified ID from the watchlist
+    
     setWatchList((prevWatchList) =>
       prevWatchList.filter((movie) => movie.id !== movieId)
     );

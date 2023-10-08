@@ -8,7 +8,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 import Footer from "../components/Footer";
 
-function Movies() {
+function ActionMovies() {
   const [randomMovies, setRandomMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,7 +34,7 @@ function Movies() {
   return (
     <ResultsContainer>
       <ResultsHeader>
-        <h2>Movies</h2>
+        <h2>Action</h2>
       </ResultsHeader>
       {isLoading ? (
         <LoadingIndicator>Loading...</LoadingIndicator>
@@ -80,10 +80,22 @@ const ResultsContainer = styled.div`
 `;
 
 const ResultsHeader = styled.div`
-  background-color: transparent;
-  padding: 20px;
-  padding-left: 40px;
-  text-align: left;
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 3rem 0;
+  background: url("https://www.worldatlas.com/r/w1200-q80/upload/fa/1e/8b/shutterstock-154896791.jpg/");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+  }
 `;
 
 const SliderContainer = styled.div`
@@ -169,4 +181,4 @@ const MoviePoster = styled.div`
   }
 `;
 
-export default Movies;
+export default ActionMovies;

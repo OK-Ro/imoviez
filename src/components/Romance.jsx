@@ -4,10 +4,9 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-
 import "@splidejs/splide/dist/css/splide.min.css";
 
-function Popular() {
+function Romance() {
   const [randomMovies, setRandomMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,13 +14,18 @@ function Popular() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl =
-          "https://node-mongo-mv85.onrender.com/api/movies/latest?count=20";
+        const localData = localStorage.getItem("randomMovies");
+        if (localData) {
+          setRandomMovies(JSON.parse(localData));
+          setIsLoading(false);
+        } else {
+          const apiUrl = "https://node-mongo-mv85.onrender.com/movies/romance";
 
-        const response = await axios.get(apiUrl);
-        console.log("API Response:", response.data);
-        setRandomMovies(response.data.movies);
-        setIsLoading(false);
+          const response = await axios.get(apiUrl);
+          console.log("API Response:", response.data);
+          setRandomMovies(response.data.movies);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("An error occurred while fetching data.");
@@ -35,10 +39,10 @@ function Popular() {
   console.log("Random Movies:", randomMovies);
 
   return (
-    <PopularContainer>
-      <PopularHeader>
-        <h1>Popular Now</h1>
-      </PopularHeader>
+    <RomanceContainer>
+      <RomanceHeader>
+        <h1>Romance</h1>
+      </RomanceHeader>
 
       {isLoading ? (
         <LoadingIndicator>Loading...</LoadingIndicator>
@@ -48,7 +52,7 @@ function Popular() {
         <SliderContainer>
           <CustomSplide
             options={{
-              perPage: window.innerWidth >= 768 ? 8 : 3,
+              perPage: window.innerWidth >= 768 ? 8 : 4,
               gap: "0.2rem",
               pagination: false,
               arrows: false,
@@ -67,11 +71,11 @@ function Popular() {
           </CustomSplide>
         </SliderContainer>
       )}
-    </PopularContainer>
+    </RomanceContainer>
   );
 }
 
-const PopularContainer = styled.div`
+const RomanceContainer = styled.div`
   background-color: #000;
   color: #fff;
   font-family: Arial, sans-serif;
@@ -82,7 +86,7 @@ const PopularContainer = styled.div`
   }
 `;
 
-const PopularHeader = styled.div`
+const RomanceHeader = styled.div`
   background-color: transparent;
   padding: 20px;
   padding-left: 40px;
@@ -103,6 +107,7 @@ const PopularHeader = styled.div`
     padding-left: 20px;
   }
 `;
+
 const SliderContainer = styled.div`
   margin: 20px;
 
@@ -124,7 +129,6 @@ const CustomSplide = styled(Splide)`
     @media (max-width: 768px) {
       widith: 200px;
       height: 18vh;
-      background: blue;
     }
   }
 
@@ -210,4 +214,4 @@ const MoviePoster = styled.div`
   }
 `;
 
-export default Popular;
+export default Romance;
