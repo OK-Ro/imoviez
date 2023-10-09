@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import axios from "axios";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+
 import { Link } from "react-router-dom";
 import "@splidejs/splide/dist/css/splide.min.css";
+import CircularLoader from "../Hooks/CircularLoader";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Trending() {
   const [randomMovies, setRandomMovies] = useState([]);
@@ -15,8 +18,7 @@ function Trending() {
     const fetchData = async () => {
       try {
         const apiUrl =
-          "https://node-mongo-mv85.onrender.com/api/movies?number=42";
-
+          "https://node-mongo-mv85.onrender.com/api/movies?number=12";
         const response = await axios.get(apiUrl);
         console.log("API Response:", response.data);
         setRandomMovies(response.data.movies);
@@ -27,7 +29,6 @@ function Trending() {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -40,7 +41,10 @@ function Trending() {
       </TrendingHeader>
 
       {isLoading ? (
-        <LoadingIndicator>Loading...</LoadingIndicator>
+        <LoadingIndicator>
+          {" "}
+          <CircularLoader />
+        </LoadingIndicator>
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : (
@@ -58,7 +62,12 @@ function Trending() {
                 <MoviePoster>
                   <Link to={`details/${movie._id}`}>
                     <img src={movie.thumbnail} alt={movie.title} />
-                    <PlayCircleOutlineIcon className="play-button" />
+                    {window.innerWidth >= 768 ? (
+                      <FontAwesomeIcon
+                        icon={faPlayCircle}
+                        className="play-button"
+                      />
+                    ) : null}
                   </Link>
                 </MoviePoster>
               </SplideSlide>
@@ -71,13 +80,12 @@ function Trending() {
 }
 
 const TrendingContainer = styled.div`
-  background-color: #000;
+  background: rgb(42, 43, 38);
   color: #fff;
   font-family: Arial, sans-serif;
-  padding: 3rem;
 
   @media (max-width: 768px) {
-    padding: 0.8rem;
+    padding: 0;
   }
 `;
 
@@ -94,7 +102,7 @@ const TrendingHeader = styled.div`
   background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  font-zize: 10rem;
+  font-size: 1.6rem;
 
   @media (max-width: 768px) {
     padding-left: 20px;
@@ -108,7 +116,8 @@ const SliderContainer = styled.div`
   margin: 20px;
 
   @media (max-width: 768px) {
-    margin: 10px;
+    margin: 6px;
+    padding: 0;
   }
 `;
 
@@ -123,8 +132,9 @@ const CustomSplide = styled(Splide)`
     border-radius: 10px;
 
     @media (max-width: 768px) {
-      widith: 200px;
-      height: 18vh;
+      widith: 180px;
+      height: 20vh;
+      margin: 5px;
     }
   }
 
@@ -136,7 +146,7 @@ const CustomSplide = styled(Splide)`
   }
 
   .splide__slide:hover {
-    transform: scale(1.05); /* Slight scale on hover */
+    transform: scale(1.05);
   }
 `;
 
@@ -148,7 +158,7 @@ const LoadingIndicator = styled.div`
   font-size: 1.5rem;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.6rem;
   }
 `;
 

@@ -3,34 +3,26 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+
 import "@splidejs/splide/dist/css/splide.min.css";
+import CircularLoader from "../Hooks/CircularLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Action() {
   const [randomMovies, setRandomMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const localData = localStorage.getItem("randomMovies");
-        if (localData) {
-          setRandomMovies(JSON.parse(localData));
-          setIsLoading(false);
-        } else {
-          const apiUrl =
-            "https://node-mongo-mv85.onrender.com/api/movies/action";
-          const response = await axios.get(apiUrl);
-          console.log("API Response:", response.data);
-          setRandomMovies(response.data.movies);
-          setIsLoading(false);
-
-          // Save the fetched movies to local storage
-          localStorage.setItem(
-            "randomMovies",
-            JSON.stringify(response.data.movies)
-          );
-        }
+        const apiUrl =
+          "https://node-mongo-mv85.onrender.com/api/movies/action?number=10";
+        const response = await axios.get(apiUrl);
+        console.log("API Response:", response.data);
+        setRandomMovies(response.data.movies);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("An error occurred while fetching data.");
@@ -48,30 +40,45 @@ function Action() {
       </PopularHeader>
 
       {isLoading ? (
-        <LoadingIndicator>Loading...</LoadingIndicator>
+        <LoadingIndicator>
+          <CircularLoader />
+        </LoadingIndicator>
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : (
         <SliderContainer>
-          <CustomSplide
-            options={{
-              perPage: window.innerWidth >= 768 ? 8 : 4,
-              gap: "0.2rem",
-              pagination: false,
-              arrows: false,
-            }}
-          >
-            {randomMovies.map((movie) => (
-              <SplideSlide key={movie._id}>
-                <MoviePoster>
-                  <Link to={`details/${movie._id}`}>
-                    <img src={movie.thumbnail} alt={movie.title} />
-                    <PlayCircleOutlineIcon className="play-button" />
-                  </Link>
-                </MoviePoster>
-              </SplideSlide>
-            ))}
-          </CustomSplide>
+          <SliderContainer>
+            <CustomSplide
+              options={{
+                perPage: 8,
+                gap: "0.2rem",
+                pagination: false,
+                arrows: false,
+                breakpoints: {
+                  768: {
+                    perPage: 4,
+                    perMove: 4,
+                  },
+                },
+              }}
+            >
+              {randomMovies.map((movie) => (
+                <SplideSlide key={movie._id}>
+                  <MoviePoster>
+                    <Link to={`details/${movie._id}`}>
+                      <img src={movie.thumbnail} alt={movie.title} />
+                      {window.innerWidth >= 768 ? (
+                        <FontAwesomeIcon
+                          icon={faPlayCircle}
+                          className="play-button"
+                        />
+                      ) : null}
+                    </Link>
+                  </MoviePoster>
+                </SplideSlide>
+              ))}
+            </CustomSplide>
+          </SliderContainer>
         </SliderContainer>
       )}
     </PopularContainer>
@@ -79,13 +86,13 @@ function Action() {
 }
 
 const PopularContainer = styled.div`
-  background-color: #000;
+  background: rgb(42, 43, 38);
   color: #fff;
   font-family: Arial, sans-serif;
-  padding: 3rem;
+  margin-top: 0;
 
   @media (max-width: 768px) {
-    padding: 0.8rem;
+    padding: 0;
   }
 `;
 
@@ -102,6 +109,7 @@ const PopularHeader = styled.div`
   background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
 
   @media (max-width: 768px) {
     padding-left: 20px;
@@ -115,7 +123,8 @@ const SliderContainer = styled.div`
   margin: 20px;
 
   @media (max-width: 768px) {
-    margin: 10px;
+    margin: 2px;
+    padding: 0;
   }
 `;
 
@@ -130,8 +139,10 @@ const CustomSplide = styled(Splide)`
     border-radius: 10px;
 
     @media (max-width: 768px) {
+      border-radius: 5px;
       widith: 200px;
       height: 18vh;
+      margin: 5px;
     }
   }
 
@@ -139,11 +150,11 @@ const CustomSplide = styled(Splide)`
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   .splide__slide:hover {
-    transform: scale(1.05); /* Slight scale on hover */
+    transform: scale(1.05);
   }
 `;
 
@@ -203,7 +214,7 @@ const MoviePoster = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 8rem;
+    font-size: 5rem;
     opacity: 0;
   }
 

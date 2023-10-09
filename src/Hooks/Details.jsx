@@ -8,7 +8,7 @@ import {
   faBookmark,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../components/Footer";
+
 import { MovieContext } from "../context/movieContext";
 
 function Details() {
@@ -140,12 +140,11 @@ function Details() {
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : null}
-      <Footer />
     </DetailsContainer>
   );
 }
 const DetailsContainer = styled.div`
-  background-color: #000;
+  background: rgb(42, 43, 38);
   padding: 20px;
   position: relative;
   padding-top: 10rem;
@@ -289,8 +288,7 @@ const PlayButton = styled.button`
   display: flex;
   align-items: center;
   transition: background-color 0.3s;
-  box-shadow: 25px 25px 75px rgb(0, 0, 0), 10px 50px 70px rgb(0, 0, 0),
-    inset 5px 5px 10px rgba(0, 0, 0, 0), inset 5px 5px 20px rgba(0, 0, 0, 0.493),
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0),
     inset -5px -5px 15px rgba(0, 0, 0, 0.75);
 
   svg {
@@ -415,7 +413,7 @@ const LikeDislikeButtons = styled.div`
 
 const AddToWatchlistButton = styled.button`
   background-color: #a5acb3;
-  box-shadow: 25px 25px 100px rgb(0, 0, 0);
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.5);
   color: #fff;
   border: none;
   border-radius: 2rem;

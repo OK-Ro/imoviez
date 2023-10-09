@@ -85,10 +85,8 @@ const Category = () => {
 const CategoriesContainer = styled.div`
   color: #fff;
   font-family: Arial, sans-serif;
-  padding: 3rem;
-  background-color: #000;
+  background: rgb(42, 43, 38);
   @media (max-width: 768px) {
-    padding: 0.8rem;
   }
 `;
 
@@ -105,7 +103,7 @@ const CategoryHeader = styled.div`
   background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-
+  font-size: 1.6rem;
   @media (max-width: 768px) {
     padding-left: 20px;
     font-size: 0.6rem;
@@ -132,8 +130,7 @@ const CategoryBlock = styled(Link)`
   border-radius: 1rem;
   text-align: center;
   cursor: pointer;
-  box-shadow: 25px 25px 75px rgb(0, 0, 0), 10px 50px 70px rgb(0, 0, 0),
-    inset 5px 5px 10px rgba(0, 0, 0, 0), inset 5px 5px 20px rgba(0, 0, 0, 0.493),
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0),
     inset -5px -5px 15px rgba(0, 0, 0, 0.75);
   text-decoration: none;
   margin: 0 2rem;

@@ -8,6 +8,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import CircularLoader from "../Hooks/CircularLoader";
 
 function SearchedResults() {
   const [searched, setSearched] = useState([]);
@@ -46,7 +47,10 @@ function SearchedResults() {
         <h2>Search Results:</h2>
       </ResultsHeader>
       {isLoading ? (
-        <LoadingIndicator>Loading...</LoadingIndicator>
+        <LoadingIndicator>
+          {" "}
+          <CircularLoader />
+        </LoadingIndicator>
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : (
@@ -81,7 +85,7 @@ function SearchedResults() {
 }
 
 const ResultsContainer = styled.div`
-  background-color: #141414;
+  background: rgb(42, 43, 38);
   color: #fff;
   font-family: Arial, sans-serif;
   padding: 3rem;

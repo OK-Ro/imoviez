@@ -12,7 +12,6 @@ const Latest = () => {
       <Container>
         {latestMovies.length > 0 ? (
           <>
-            {/* Use the <style> tag outside of the JSX */}
             <style>{CarouselStyles}</style>
             <Carousel
               autoPlay
@@ -49,30 +48,28 @@ const Latest = () => {
   );
 };
 
-const Wrapper = styled.div`
-  background-color: #f0f0f0;
-`;
+const Wrapper = styled.div``;
 
 const Container = styled.div`
-  background-color: #000;
-  padding-top: 15rem;
+  background: rgb(42, 43, 38);
+  padding-top: 10rem;
   display: block;
   box-sizing: border-box;
-
+  width: 100%;
   @media (max-width: 768px) {
-    padding-top: 4rem;
+    padding-top: 6rem;
   }
 `;
 
 const Card = styled.div`
   position: relative;
-  width: 93vw;
+  width: 97vw;
   height: 35rem;
   border-radius: 2rem;
   overflow: hidden;
   margin: 0 auto;
   border: 1rem solid transparent;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+
   transition: transform 0.2s ease;
 
   &:hover {
@@ -80,16 +77,19 @@ const Card = styled.div`
   }
 
   @media (max-width: 768px) {
-    max-width: 100%;
-    height: 10rem;
+    width: 102vw;
+    height: 14rem;
     border-radius: 1.5rem;
+    padding-top: 5rem;
+    padding: 0;
   }
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.9);
 `;
 
 const Content = styled.div`

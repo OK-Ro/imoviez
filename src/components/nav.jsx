@@ -62,14 +62,14 @@ const Nav = styled.nav`
   left: 0;
   right: 0;
   z-index: 999;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
   color: #fff;
   transition: background-color 0.3s ease-in-out;
 
   ${(props) =>
     props.isScrolled &&
     `
-    background-color: #333;
+    background-color: rgb(44, 33, 49);
     padding: 1.5rem 2.5rem;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   `}
@@ -79,7 +79,7 @@ const Nav = styled.nav`
     flex-direction: column;
     width: 100%;
     align-items: center;
-    height: 10vh;
+    height: 6vh;
     padding-top: 0.7rem;
   }
 `;
@@ -164,7 +164,7 @@ const IconLink = styled(Link)`
 
   @media (max-width: 768px) {
     font-size: 1.5rem;
-    margin-right: 4rem;
+    margin-right: 5rem;
   }
 `;
 

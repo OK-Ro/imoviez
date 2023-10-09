@@ -4,7 +4,6 @@ import { MovieContext } from "../context/movieContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
 
 function Watchlist() {
   const { watchList, removeFromWatchlist } = useContext(MovieContext);
@@ -40,7 +39,6 @@ function Watchlist() {
           ))}
         </MoviesGrid>
       )}
-      <Footer />
     </WatchlistContainer>
   );
 }
@@ -48,7 +46,7 @@ function Watchlist() {
 const WatchlistContainer = styled.div`
   padding: 20px;
 
-  background-color: #141414;
+  background: rgb(42, 43, 38);
   color: #fff; /* Text color */
   height: fit-content;
   padding-top: 10rem;
@@ -105,7 +103,7 @@ const CustomH1 = styled.h1`
 const EmptyWatchlistMessage = styled.p`
   font-size: 18px;
   font-weight: bold;
-  color: #777;
+  color: white;
 `;
 const MoviesGrid = styled.div`
   display: grid;

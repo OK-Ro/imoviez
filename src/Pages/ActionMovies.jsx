@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 import Footer from "../components/Footer";
+import CircularLoader from "../Hooks/CircularLoader";
 
 function ActionMovies() {
   const [randomMovies, setRandomMovies] = useState([]);
@@ -37,7 +38,10 @@ function ActionMovies() {
         <h2>Action</h2>
       </ResultsHeader>
       {isLoading ? (
-        <LoadingIndicator>Loading...</LoadingIndicator>
+        <LoadingIndicator>
+          {" "}
+          <CircularLoader />
+        </LoadingIndicator>
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : (
@@ -102,7 +106,7 @@ const SliderContainer = styled.div`
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Add space between columns */
+  justify-content: space-between;
 `;
 
 const CustomSplide = styled(Splide)`

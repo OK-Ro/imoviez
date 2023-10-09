@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+
 import "@splidejs/splide/dist/css/splide.min.css";
+import CircularLoader from "../Hooks/CircularLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Romance() {
   const [randomMovies, setRandomMovies] = useState([]);
@@ -14,18 +17,12 @@ function Romance() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const localData = localStorage.getItem("randomMovies");
-        if (localData) {
-          setRandomMovies(JSON.parse(localData));
-          setIsLoading(false);
-        } else {
-          const apiUrl = "https://node-mongo-mv85.onrender.com/movies/romance";
-
-          const response = await axios.get(apiUrl);
-          console.log("API Response:", response.data);
-          setRandomMovies(response.data.movies);
-          setIsLoading(false);
-        }
+        const apiUrl =
+          "https://node-mongo-mv85.onrender.com/api/movies/romance";
+        const response = await axios.get(apiUrl);
+        console.log("API Response:", response.data);
+        setRandomMovies(response.data.movies);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching random movies:", error);
         setError("An error occurred while fetching data.");
@@ -36,8 +33,6 @@ function Romance() {
     fetchData();
   }, []);
 
-  console.log("Random Movies:", randomMovies);
-
   return (
     <RomanceContainer>
       <RomanceHeader>
@@ -45,7 +40,10 @@ function Romance() {
       </RomanceHeader>
 
       {isLoading ? (
-        <LoadingIndicator>Loading...</LoadingIndicator>
+        <LoadingIndicator>
+          {" "}
+          <CircularLoader />
+        </LoadingIndicator>
       ) : error ? (
         <ErrorIndicator>{error}</ErrorIndicator>
       ) : (
@@ -63,7 +61,12 @@ function Romance() {
                 <MoviePoster>
                   <Link to={`details/${movie._id}`}>
                     <img src={movie.thumbnail} alt={movie.title} />
-                    <PlayCircleOutlineIcon className="play-button" />
+                    {window.innerWidth >= 768 ? (
+                      <FontAwesomeIcon
+                        icon={faPlayCircle}
+                        className="play-button"
+                      />
+                    ) : null}
                   </Link>
                 </MoviePoster>
               </SplideSlide>
@@ -76,13 +79,13 @@ function Romance() {
 }
 
 const RomanceContainer = styled.div`
-  background-color: #000;
+  background: rgb(42, 43, 38);
   color: #fff;
   font-family: Arial, sans-serif;
-  padding: 3rem;
+  margin-top: 0;
 
   @media (max-width: 768px) {
-    padding: 0.8rem;
+    padding: 0;
   }
 `;
 
@@ -99,6 +102,7 @@ const RomanceHeader = styled.div`
   background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
 
   @media (max-width: 768px) {
     padding-left: 20px;
@@ -112,7 +116,8 @@ const SliderContainer = styled.div`
   margin: 20px;
 
   @media (max-width: 768px) {
-    margin: 10px;
+    margin: 2px;
+    padding: 0;
   }
 `;
 
@@ -127,8 +132,10 @@ const CustomSplide = styled(Splide)`
     border-radius: 10px;
 
     @media (max-width: 768px) {
+      border-radius: 5px;
       widith: 200px;
       height: 18vh;
+      margin: 5px;
     }
   }
 
@@ -136,11 +143,11 @@ const CustomSplide = styled(Splide)`
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   .splide__slide:hover {
-    transform: scale(1.05); /* Slight scale on hover */
+    transform: scale(1.05);
   }
 `;
 
@@ -168,7 +175,6 @@ const ErrorIndicator = styled.div`
     font-size: 1rem;
   }
 `;
-
 const MoviePoster = styled.div`
   width: 10vw;
   margin: 10px;
@@ -201,7 +207,7 @@ const MoviePoster = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 8rem;
+    font-size: 5rem;
     opacity: 0;
   }
 
