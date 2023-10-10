@@ -80,7 +80,7 @@ function Video() {
         <Header>
           <h2>Romantic</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls={false}>
+        <VideoElement autoPlay muted controls={false}>
           <source src="/Romatic.mp4" type="video/mp4" />
         </VideoElement>
       </VideoContainer>
@@ -89,7 +89,7 @@ function Video() {
         <Header>
           <h2>Adventure</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls={false}>
+        <VideoElement autoPlay muted controls={false}>
           <source src="/adventure.mp4" type="video/mp4" />
         </VideoElement>
       </VideoContainer>
@@ -98,7 +98,7 @@ function Video() {
         <Header>
           <h2>Horror</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls={false}>
+        <VideoElement autoPlay muted controls={false}>
           <source src="/horor.mp4" type="video/mp4" />
         </VideoElement>
       </LargeVideoContainer>
