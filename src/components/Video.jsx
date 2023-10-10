@@ -1,6 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 
+function Video() {
+  return (
+    <RowContainer>
+      <VideoContainer>
+        <Header>
+          <h2>Romantic</h2>
+        </Header>
+        <VideoElement autoPlay muted loop controls={false}>
+          <source src="/Romatic.mp4" type="video/mp4" />
+        </VideoElement>
+      </VideoContainer>
+
+      <VideoContainer>
+        <Header>
+          <h2>Adventure</h2>
+        </Header>
+        <VideoElement autoPlay muted loop controls={false}>
+          <source src="/adventure.mp4" type="video/mp4" />
+        </VideoElement>
+      </VideoContainer>
+
+      <LargeVideoContainer>
+        <Header>
+          <h2>Horror</h2>
+        </Header>
+        <VideoElement autoPlay muted loop controls={false}>
+          <source src="/horor.mp4" type="video/mp4" />
+        </VideoElement>
+      </LargeVideoContainer>
+    </RowContainer>
+  );
+}
 const RowContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -72,38 +104,5 @@ const Header = styled.div`
     padding-left: 20px;
   }
 `;
-
-function Video() {
-  return (
-    <RowContainer>
-      <VideoContainer>
-        <Header>
-          <h2>Romantic</h2>
-        </Header>
-        <VideoElement autoPlay muted loop controls={false}>
-          <source src="/Romatic.mp4" type="video/mp4" />
-        </VideoElement>
-      </VideoContainer>
-
-      <VideoContainer>
-        <Header>
-          <h2>Adventure</h2>
-        </Header>
-        <VideoElement autoPlay muted loop controls={false}>
-          <source src="/adventure.mp4" type="video/mp4" />
-        </VideoElement>
-      </VideoContainer>
-
-      <LargeVideoContainer>
-        <Header>
-          <h2>Horror</h2>
-        </Header>
-        <VideoElement autoPlay muted loop controls={false}>
-          <source src="/horor.mp4" type="video/mp4" />
-        </VideoElement>
-      </LargeVideoContainer>
-    </RowContainer>
-  );
-}
 
 export default Video;

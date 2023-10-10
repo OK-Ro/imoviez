@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Action() {
-  const [randomMovies, setRandomMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,8 +20,7 @@ function Action() {
         const apiUrl =
           "https://node-mongo-mv85.onrender.com/api/movies/action?number=10";
         const response = await axios.get(apiUrl);
-        console.log("API Response:", response.data);
-        setRandomMovies(response.data.movies);
+        setMovies(response.data.movies);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching random movies:", error);
@@ -62,7 +61,7 @@ function Action() {
                 },
               }}
             >
-              {randomMovies.map((movie) => (
+              {movies.map((movie) => (
                 <SplideSlide key={movie._id}>
                   <MoviePoster>
                     <Link to={`details/${movie._id}`}>

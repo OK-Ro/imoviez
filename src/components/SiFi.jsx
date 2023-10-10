@@ -35,7 +35,7 @@ function SiFi() {
   return (
     <SiFiContainer>
       <SiFiHeader>
-        <h1>SiFi</h1>
+        <h1>Si-Fi</h1>
       </SiFiHeader>
 
       {isLoading ? (

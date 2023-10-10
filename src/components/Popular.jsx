@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Popular() {
-  const [randomMovies, setRandomMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,7 @@ function Popular() {
 
         const response = await axios.get(apiUrl);
         console.log("API Response:", response.data);
-        setRandomMovies(response.data.movies);
+        setMovies(response.data.movies);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching random movies:", error);
@@ -32,8 +32,6 @@ function Popular() {
 
     fetchData();
   }, []);
-
-  console.log("Random Movies:", randomMovies);
 
   return (
     <PopularContainer>
@@ -57,7 +55,7 @@ function Popular() {
               arrows: false,
             }}
           >
-            {randomMovies.map((movie) => (
+            {movies.map((movie) => (
               <SplideSlide key={movie._id}>
                 <MoviePoster>
                   <Link to={`details/${movie._id}`}>

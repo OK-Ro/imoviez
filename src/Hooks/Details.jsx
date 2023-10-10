@@ -46,14 +46,6 @@ function Details() {
     fetchDetails();
   }, [fetchDetails]);
 
-  const handleLike = () => {
-    console.log("Liked");
-  };
-
-  const handleDislike = () => {
-    console.log("Disliked");
-  };
-
   return (
     <DetailsContainer>
       <BackButton to="/">
@@ -125,10 +117,10 @@ function Details() {
             <strong>Rating:</strong>
             <i className="fas fa-star"></i>
             <LikeDislikeButtons>
-              <LikeButton onClick={handleLike}>
+              <LikeButton>
                 <i className="fas fa-thumbs-up"></i> Like
               </LikeButton>
-              <DislikeButton onClick={handleDislike}>
+              <DislikeButton>
                 <i className="fas fa-thumbs-down"></i> Dislike
               </DislikeButton>
             </LikeDislikeButtons>
