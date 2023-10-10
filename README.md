@@ -2,7 +2,7 @@
 
 This is a React-based movie streaming application that allows users to browse and see movies deatils and ratings various genres. The app is designed to provide a user-friendly interface for discovering and enjoying a wide range of movies.
 
-![App Screenshot](<![screenshort](image.png)>)
+![App Screenshot](/public/fullscreen.png) ![mobile](/public/mobile.png)
 
 ## Demo
 
