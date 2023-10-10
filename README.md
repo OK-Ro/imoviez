@@ -51,7 +51,7 @@ Before you begin, ensure you have met the following requirements:
 
 ### Code structure
 
-assets
+
 public
 └── index.html
 src
@@ -93,6 +93,3 @@ src
 └── App.js
 └── index.js
 
-package-loc.json
-package.json
-README.md
