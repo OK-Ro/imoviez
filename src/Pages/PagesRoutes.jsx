@@ -15,7 +15,10 @@ import AdeventureMovies from "../Categories/AdeventureMovies";
 function PagesRoutes() {
   return (
     <Routes>
-      <Route path="/searchedResults/:query" element={<SearchedResults />} />
+      <Route
+        path="/searchedResults/:searchQuery"
+        element={<SearchedResults />}
+      />
       <Route path="/searchbar" element={<SearchBar />} />
       <Route path="/watchlist" element={<Watchlist />} />
       <Route path="/details/:id" element={<Details />} />

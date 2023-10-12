@@ -8,7 +8,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavigationBar />
-
         <MovieContextProvider>
           <PagesRoutes />
         </MovieContextProvider>

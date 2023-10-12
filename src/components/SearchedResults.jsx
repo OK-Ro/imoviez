@@ -4,10 +4,9 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import CircularLoader from "../Hooks/CircularLoader";
 
 function SearchedResults() {
@@ -18,9 +17,7 @@ function SearchedResults() {
 
   const fetchData = async (searchQuery) => {
     try {
-      const apiUrl = `https://node-mongo-mv85.onrender.com/api/movies/search?query=${encodeURIComponent(
-        searchQuery
-      )}`;
+      const apiUrl = `https://node-mongo-mv85.onrender.com/api/movies/search?title=${searchQuery}`;
 
       const response = await axios.get(apiUrl);
 
@@ -35,8 +32,8 @@ function SearchedResults() {
   };
 
   useEffect(() => {
-    fetchData(params.search);
-  }, [params.search]);
+    fetchData(params.searchQuery);
+  }, [params.searchQuery]);
 
   return (
     <ResultsContainer>
@@ -70,7 +67,12 @@ function SearchedResults() {
                     <Link to={`/details/${movie._id}`}>
                       <MoviePoster>
                         <img src={movie.thumbnail} alt={movie.title} />
-                        <PlayCircleOutlineIcon className="play-button" />
+                        {window.innerWidth >= 768 ? (
+                          <FontAwesomeIcon
+                            icon={faPlayCircle}
+                            className="play-button"
+                          />
+                        ) : null}
                       </MoviePoster>
                     </Link>
                   </SplideSlide>

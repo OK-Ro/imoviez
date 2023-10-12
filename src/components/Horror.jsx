@@ -34,8 +34,6 @@ function Horror() {
     fetchData();
   }, []);
 
-  console.log("Random Movies:", randomMovies);
-
   return (
     <HorrorContainer>
       <HorrorHeader>
