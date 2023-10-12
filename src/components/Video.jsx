@@ -8,7 +8,7 @@ function Video() {
         <Header>
           <h2>Romantic</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls>
+        <VideoElement autoPlay muted loop controls={false}>
           <source src="/Romantic.mp4" type="video/mp4" />
         </VideoElement>
       </VideoContainer>
@@ -17,7 +17,7 @@ function Video() {
         <Header>
           <h2>Action</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls>
+        <VideoElement autoPlay muted loop controls={false}>
           <source src="/action.mp4" type="video/mp4" />
         </VideoElement>
       </VideoContainer>
@@ -26,14 +26,13 @@ function Video() {
         <Header>
           <h2>Horror</h2>
         </Header>
-        <VideoElement autoPlay muted loop controls>
+        <VideoElement autoPlay muted loop controls={false}>
           <source src="/horror.mp4" type="video/mp4" />
         </VideoElement>
       </LargeVideoContainer>
     </RowContainer>
   );
 }
-
 const RowContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
