@@ -52,14 +52,14 @@ const WatchlistContainer = styled.div`
   padding-top: 10rem;
   padding-bottom: 20rem;
   @media (max-width: 768px) {
-    padding: 3.5rem;
+    padding: 2rem;
     padding-top: 5rem;
     padding-bottom: 8rem;
   }
 `;
 
 const BackButton = styled(Link)`
-  background-color: #333;
+  background-color: #ff006a;
   color: #fff;
   border: none;
   border-radius: 6px;

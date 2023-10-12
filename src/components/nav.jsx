@@ -80,7 +80,7 @@ const Nav = styled.nav`
     width: 100%;
     align-items: center;
     height: 6vh;
-    padding-top: 0.7rem;
+    padding-top: 1.2rem;
   }
 `;
 
@@ -126,7 +126,7 @@ const IconLink = styled(Link)`
     display: block;
     width: 0;
     height: 2px;
-    background-color: #ff7000;
+    background-color: #ff006a;
     position: absolute;
     bottom: -2px;
     left: 0;
@@ -134,7 +134,7 @@ const IconLink = styled(Link)`
   }
 
   &:hover {
-    color: #ff7000;
+    color: #ff006a;
     &::before {
       width: 100%;
     }

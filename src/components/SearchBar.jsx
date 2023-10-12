@@ -23,6 +23,11 @@ function SearchBar({ onSearch }) {
           value={input}
         />
       </SearchContainer>
+
+      <AdditionalInfo>
+        <p>Find your favorite movies and characters</p>
+        <p>Search by title, character, or genre</p>
+      </AdditionalInfo>
     </FormStyle>
   );
 }
@@ -72,6 +77,17 @@ const SearchInput = styled.input`
   @media (max-width: 768px) {
     font-size: 0.6rem;
     height: 0.5rem;
+  }
+`;
+
+const AdditionalInfo = styled.div`
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
   }
 `;
 

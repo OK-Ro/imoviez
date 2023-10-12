@@ -45,7 +45,6 @@ function SearchedResults() {
       </ResultsHeader>
       {isLoading ? (
         <LoadingIndicator>
-          {" "}
           <CircularLoader />
         </LoadingIndicator>
       ) : error ? (
@@ -93,7 +92,7 @@ const ResultsContainer = styled.div`
   padding: 3rem;
   @media (max-width: 768px) {
     padding: 1rem;
-    padding-top: 4rem;
+    padding-top: 5rem;
   }
 `;
 
@@ -152,7 +151,7 @@ const CustomSplide = styled(Splide)`
   }
 `;
 const BackButton = styled(Link)`
-  background-color: #333;
+  background-color: #ff006a;
   color: #fff;
   border: none;
   border-radius: 6px;

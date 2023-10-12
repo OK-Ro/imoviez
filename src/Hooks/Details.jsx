@@ -16,7 +16,6 @@ function Details() {
   const [details, setDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [added, setAdded] = useState(false);
 
   const { addToWatchlist, removeFromWatchlist } = useContext(MovieContext);
@@ -143,7 +142,8 @@ const DetailsContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-bottom: 1rem;
-    padding-top: 6rem;
+
+    padding: 6rem 0.6rem 0 0.6rem;
   }
 `;
 
@@ -152,6 +152,10 @@ const CoverImage = styled.div`
   margin-bottom: 20px;
   width: 100%;
   height: 50vh;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 60vh;
+  }
 
   img {
     max-width: 100%;
@@ -164,6 +168,7 @@ const CoverImage = styled.div`
       width: 100%;
       height: 100%;
       margin-top: 2rem;
+      object-fit: fill;
     }
   }
 
@@ -187,8 +192,8 @@ const MovieDetails = styled.div`
 
   @media (max-width: 768px) {
     border-radius: 2rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
     padding: 10px;
     height: fit-content;
     margin-top: 3rem;
@@ -196,7 +201,7 @@ const MovieDetails = styled.div`
   }
 `;
 const BackButton = styled(Link)`
-  background-color: #133;
+  background-color: #ff006a;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -222,7 +227,7 @@ const Content = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 0.5rem;
+    padding: 0.1rem;
   }
 `;
 
@@ -247,6 +252,9 @@ const ImageContainer = styled.div`
 const DetailsInfo = styled.div`
   flex: 2;
   padding-right: 1rem;
+  @media (max-width: 768px) {
+    padding: 0.1rem;
+  }
 `;
 
 const TopInfo = styled.div`
@@ -269,7 +277,7 @@ const InfoItem = styled.div`
 `;
 
 const PlayButton = styled.button`
-  background-color: #ff5722;
+  background-color: #ff006a;
   color: #fff;
   border: none;
   border-radius: 6rem;
