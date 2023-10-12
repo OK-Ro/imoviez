@@ -152,6 +152,7 @@ const CoverImage = styled.div`
   margin-bottom: 20px;
   width: 100%;
   height: 50vh;
+
   @media (max-width: 768px) {
     width: 100%;
     height: 60vh;
@@ -168,14 +169,8 @@ const CoverImage = styled.div`
       width: 100%;
       height: 100%;
       margin-top: 2rem;
-      object-fit: fill;
+      object-fit: contain;
     }
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
   }
 `;
 
@@ -191,7 +186,7 @@ const MovieDetails = styled.div`
   margin-bottom: 10rem;
 
   @media (max-width: 768px) {
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     margin-left: 0.1rem;
     margin-right: 0.1rem;
     padding: 10px;
@@ -219,6 +214,7 @@ const BackButton = styled(Link)`
     padding: 5px 15px;
     border-radius: 3px;
     font-size: 14px;
+    margin-left: 0.5rem;
   }
 `;
 
@@ -302,7 +298,7 @@ const PlayButton = styled.button`
   @media (max-width: 768px) {
     padding: 5px 15px;
     border-radius: 1.5rem;
-    font-size: 13px;
+    font-size: 12px;
     height: 2.4rem;
     width: 7rem;
   }
@@ -439,6 +435,7 @@ const AddToWatchlistButton = styled.button`
     font-size: 13px;
     height: 2.4rem;
     width: 9rem;
+    margin-right: 0;
   }
 `;
 
